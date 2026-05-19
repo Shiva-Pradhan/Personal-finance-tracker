@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinMatrix | Personal Finance Dashboard</title>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- FontAwesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <!-- Link to external CSS stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="header">
+        <h1>💰 FinMatrix</h1>
+        <div class="header-controls">
+            <select id="currencySelector" style="width: auto;">
+                <option value="₹">₹ INR</option>
+                <option value="$">$ USD</option>
+                <option value="€">€ EUR</option>
+                <option value="£">£ GBP</option>
+            </select>
+            <button id="themeToggle">🌙 Dark Mode</button>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Income Setup Form Container -->
+        <section class="form-container">
+            <h2>Set Net Monthly Income</h2>
+            <div class="income-form-layout">
+                <input type="number" id="monthlyIncome" placeholder="Enter net income">
+                <button id="saveIncomeBtn">Save Income</button>
+                <button id="clearAllBtn" class="btn-danger">🧹 Reset All Data</button>
+            </div>
+        </section>
+
+        <!-- Dashboard Metrics Grid -->
+        <section class="dashboard">
+            <div class="card income-card">
+                <h3>Total Income</h3>
+                <p id="totalIncomeDisplay">₹0.00</p>
+            </div>
+            <div class="card expense-card">
+                <h3>Total Expenses</h3>
+                <p id="totalExpenseDisplay">₹0.00</p>
+            </div>
+            <div class="card balance-card">
+                <h3>Net Balance</h3>
+                <p id="netBalanceDisplay">₹0.00</p>
+            </div>
+        </section>
+
+        <!-- Features Matrix: Budgets & Financial Goals -->
+        <div class="two-column-grid">
+            <section class="feature-section">
+                <h2>🎯 Category Budget Limits</h2>
+                <form id="budgetForm">
+                    <select id="budgetCategory">
+                        <option>Food</option>
+                        <option>Rent</option>
+                        <option>Salary</option>
+                        <option>Shopping</option>
+                        <option>Travel</option>
+                        <option>Utilities</option>
+                        <option>Entertainment</option>
+                    </select>
+                    <input type="number" id="budgetAmount" placeholder="Limit Amount" required>
+                    <button type="submit">Set Budget</button>
+                </form>
+                <div id="budgetStatusContainer" style="margin-top: 15px;"></div>
+            </section>
+
+            <section class="feature-section">
+                <h2>🏆 Financial Savings Goals</h2>
+                <form id="goalForm">
+                    <input type="text" id="goalName" placeholder="Goal Name (e.g. Laptop)" required>
+                    <input type="number" id="goalTarget" placeholder="Target Amount" required>
+                    <button type="submit">Add Goal</button>
+                </form>
+                <div id="goalsContainer" style="margin-top: 15px;"></div>
+            </section>
+        </div>
+
+        <!-- Transaction Form -->
+        <section class="form-container">
+            <h2>Add Transaction</h2>
+            <form id="transactionForm">
+                <input type="date" id="date" required>
+                <input type="text" id="description" placeholder="Description" required>
+                <select id="category">
+                    <option>Food</option>
+                    <option>Rent</option>
+                    <option>Salary</option>
+                    <option>Shopping</option>
+                    <option>Travel</option>
+                    <option>Utilities</option>
+                    <option>Entertainment</option>
+                </select>
+                <select id="type">
+                    <option value="income">Income</option>
+                    <option value="expense">Expense</option>
+                </select>
+                <input type="number" id="amount" step="0.01" placeholder="Amount" required>
+                <label style="display: flex; align-items: center; gap: 8px;">
+                    Recurring
+                    <input type="checkbox" id="recurring">
+                </label>
+                <button type="submit">Add Transaction</button>
+            </form>
+        </section>
+
+        <!-- Search + Filters -->
+        <section class="form-container">
+            <h2>Search & Filters</h2>
+            <div class="filter-grid">
+                <input id="searchInput" placeholder="Search Description">
+                <select id="filterType">
+                    <option value="all">All</option>
+                    <option value="income">Income</option>
+                    <option value="expense">Expense</option>
+                </select>
+            </div>
+        </section>
+
+        <!-- Analytics Section -->
+        <section class="analytics">
+            <h2>Analytics</h2>
+            <div class="chart-grid">
+                <div class="chart-wrapper">
+                    <canvas id="expenseChart"></canvas>
+                </div>
+                <div class="chart-wrapper">
+                    <canvas id="trendChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- History & CSV Actions -->
+        <section class="history">
+            <div class="action-bar">
+                <h2>Transaction History</h2>
+                <div class="flex-gap">
+                    <button id="exportCsvBtn" class="btn-secondary"><i class="fa-solid fa-file-export"></i> Export CSV</button>
+                    <button onclick="document.getElementById('importCsvFile').click()" class="btn-secondary"><i class="fa-solid fa-file-import"></i> Import CSV</button>
+                    <input type="file" id="importCsvFile" accept=".csv" style="display: none;">
+                </div>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Description</th>
+                        <th>Category</th>
+                        <th>Type</th>
+                        <th>Amount</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="transactionList"></tbody>
+            </table>
+        </section>
+    </main>
+
+    <!-- Link to external application logic script -->
+    <script src="script.js"></script>
+</body>
+</html>
