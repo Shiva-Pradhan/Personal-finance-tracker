@@ -205,3 +205,127 @@ tr:nth-child(even) { background: rgba(255,255,255,.04); }
     table { display: block; overflow-x: auto; }
 }
 
+/* =========================
+   GLOBAL RESPONSIVE FIX
+========================= */
+
+html, body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+/* Make all media responsive */
+img, canvas, video {
+    max-width: 100%;
+    height: auto;
+}
+
+/* =========================
+   CONTAINER SAFETY
+========================= */
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 10px;
+}
+
+/* =========================
+   RESPONSIVE GRID FIX
+========================= */
+
+.dashboard,
+.chart-grid,
+.two-column-grid {
+    display: grid;
+    gap: 15px;
+}
+
+/* Desktop default */
+.dashboard {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.chart-grid {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.two-column-grid {
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+}
+
+/* =========================
+   FORM FIX
+========================= */
+
+form {
+    width: 100%;
+}
+
+input, select, button {
+    width: 100%;
+    max-width: 100%;
+}
+
+/* =========================
+   TABLE RESPONSIVE FIX
+========================= */
+
+table {
+    width: 100%;
+    overflow-x: auto;
+    display: block;
+}
+
+/* =========================
+   MOBILE FIX (IMPORTANT)
+========================= */
+
+@media (max-width: 768px) {
+
+    .header {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+
+    .dashboard {
+        grid-template-columns: 1fr;
+    }
+
+    .chart-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .two-column-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .income-form-layout {
+        flex-direction: column;
+    }
+
+    .chart-wrapper {
+        height: 250px;
+    }
+}
+
+/* =========================
+   SMALL MOBILE FIX
+========================= */
+
+@media (max-width: 480px) {
+    body {
+        padding: 10px;
+    }
+
+    .card p {
+        font-size: 22px;
+    }
+}
