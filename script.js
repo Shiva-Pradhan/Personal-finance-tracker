@@ -30,7 +30,6 @@ function generateId() {
     return Date.now() + Math.floor(Math.random() * 1000);
 }
 
-// Fixed Real-Time Income Sync Engine
 document.getElementById("saveIncomeBtn").addEventListener("click", function() {
     const inputField = document.getElementById("monthlyIncome");
     monthlyIncome = Number(inputField.value) || 0;
@@ -39,7 +38,6 @@ document.getElementById("saveIncomeBtn").addEventListener("click", function() {
     inputField.value = monthlyIncome;
 });
 
-// Clear Button Logic: Clears everything instantly
 document.getElementById("clearAllBtn").addEventListener("click", function() {
     if(confirm("Are you absolutely sure you want to delete all metrics, budgets, goals, and history?")) {
         localStorage.removeItem(STORAGE_KEY);
@@ -58,7 +56,6 @@ document.getElementById("clearAllBtn").addEventListener("click", function() {
     }
 });
 
-// Transaction Controller
 document.getElementById("transactionForm").addEventListener("submit", function(e) {
     e.preventDefault();
     const category = document.getElementById("category").value;
@@ -128,7 +125,6 @@ window.deleteGoal = function(id) {
     render();
 };
 
-// Math Matrix Calculations Engine
 let globalCalculatedBalance = 0;
 function updateDashboard() {
     let totalIncomeCalculated = Number(monthlyIncome); 
